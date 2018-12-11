@@ -14,7 +14,7 @@ namespace XamarinEFCoreSample
         public App()
         {
             InitializeComponent();
-
+            InitializeDatabase();
 
             MainPage = new MainPage();
         }
