@@ -19,7 +19,7 @@ namespace XamarinEFCoreSample.Models
             {
                 try
                 {
-                    return Path.Combine(FileSystem.AppDataDirectory, _databasePath);
+                    return $"{FileSystem.AppDataDirectory}{Path.DirectorySeparatorChar}{_databaseName}";
                 }
                 catch
                 {
