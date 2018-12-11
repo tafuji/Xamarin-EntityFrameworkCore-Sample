@@ -150,4 +150,7 @@
       <Name>XamarinEFCoreSample</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <LinkDescription Include="LinkDescription.xml" />
+  </ItemGroup>
 </Project>

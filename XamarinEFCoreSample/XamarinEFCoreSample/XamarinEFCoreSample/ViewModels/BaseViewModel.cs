@@ -12,7 +12,7 @@ namespace XamarinEFCoreSample.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<Item> DataStore => new ItemDataStore();
 
         bool isBusy = false;
         public bool IsBusy

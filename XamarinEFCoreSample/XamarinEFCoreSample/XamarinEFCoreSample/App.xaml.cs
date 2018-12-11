@@ -1,7 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinEFCoreSample.Models;
 using XamarinEFCoreSample.Views;
+using Microsoft.EntityFrameworkCore;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XamarinEFCoreSample
@@ -30,6 +32,15 @@ namespace XamarinEFCoreSample
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void InitializeDatabase()
+        {
+            SQLitePCL.Batteries_V2.Init();
+            using (var context = new TodoDbContext())
+            {
+                context.Database.Migrate();
+            }
         }
     }
 }
