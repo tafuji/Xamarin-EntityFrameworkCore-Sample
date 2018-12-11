@@ -9,6 +9,8 @@ namespace XamarinEFCoreSample.Models
 {
     public class TodoDbContext : DbContext
     {
+        public DbSet<Item> Items { get; set; }
+
         private string _databaseName = "Todo.db";
 
         private string _databasePath
