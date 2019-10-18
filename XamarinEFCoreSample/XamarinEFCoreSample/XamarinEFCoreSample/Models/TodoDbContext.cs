@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Logging.Debug;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +12,12 @@ namespace XamarinEFCoreSample.Models
 {
     public class TodoDbContext : DbContext
     {
+        public static readonly LoggerFactory loggerFactory = 
+            new LoggerFactory(new[]
+            { 
+                new DebugLoggerProvider((_, __) => _== DbLoggerCategory.Database.Command.Name && __ == LogLevel.Information)
+            });
+
         public DbSet<Item> Items { get; set; }
 
         private string _databaseName = "Todo.db";
@@ -30,7 +39,10 @@ namespace XamarinEFCoreSample.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={_databasePath}");
+            optionsBuilder
+                .UseLoggerFactory(loggerFactory)
+                .EnableSensitiveDataLogging()
+                .UseSqlite($"Data Source={_databasePath}");
         }
     }
 }
